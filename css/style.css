@@ -1,0 +1,26 @@
+/* VARIABLES */
+:root {
+    --theme-color-yellow: rgb(245, 240, 187);
+    --theme-color-green: rgb(196, 223, 170);
+    --theme-color-teal: rgb(144, 200, 172);
+    --theme-color-blue: rgb(115, 169, 173);
+}
+
+/* GLOBAL RESETS */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
