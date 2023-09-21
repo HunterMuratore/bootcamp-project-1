@@ -24,3 +24,24 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+/* CUSTOM STYLES */
+
+#hero {
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url("../images/pexels-photo-172510.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 800px;
+    
+    
+    
+}
+
+#hero h2 {
+    padding-top: 200px;
+    text-align: center;
+    color: var(--theme-color-blue);
+    font-size: 200%;
+    font-weight: bold;
+}
