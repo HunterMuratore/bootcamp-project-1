@@ -1,5 +1,5 @@
-/* VARIABLES */
-/* :root {
+VARIABLES
+ :root {
     --theme-color-yellow: rgb(245, 240, 187);
     --theme-color-green: rgb(196, 223, 170);
     --theme-color-teal: rgb(144, 200, 172);
@@ -7,7 +7,7 @@
 }
 
 /* GLOBAL RESETS */
-/* * {
+ * {
     margin: 0;
     padding: 0;
 }
@@ -23,5 +23,27 @@ ol, ul {
 img {
   max-width: 100%;
   height: auto;
-} */ 
+} 
 
+.modal {
+    gap: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vh;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: var(--gap);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-inner {
+  background-color: #fff;
+  width: 100%;
+  max-width: 800px;
+  overflow: hidden;
+  border-radius: 4px;
+}
