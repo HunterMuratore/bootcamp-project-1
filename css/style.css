@@ -1,44 +1,57 @@
-VARIABLES
- :root {
-    --theme-color-yellow: rgb(245, 240, 187);
-    --theme-color-green: rgb(196, 223, 170);
-    --theme-color-teal: rgb(144, 200, 172);
-    --theme-color-blue: rgb(115, 169, 173);
+VARIABLES :root {
+  --theme-color-yellow: rgb(245, 240, 187);
+  --theme-color-green: rgb(196, 223, 170);
+  --theme-color-teal: rgb(144, 200, 172);
+  --theme-color-blue: rgb(115, 169, 173);
 }
 
 /* GLOBAL RESETS */
- * {
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
 img {
   max-width: 100%;
   height: auto;
-} 
+}
 
 .modal {
-    gap: 15px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vh;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    padding: var(--gap);
-    background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.5);
 }
+
+.modal-card-head {
+  background-color: rgb(245, 240, 187);
+}
+
+.modal-card-body {
+  background-color: rgb(196, 223, 170);
+}
+
+.modal-card-foot {
+  background-color: rgb(144, 200, 172);
+}
+
 
 .modal-inner {
   background-color: #fff;
@@ -46,4 +59,20 @@ img {
   max-width: 800px;
   overflow: hidden;
   border-radius: 4px;
+}
+
+.close-Modal-Button {
+  border-style: none;
+  border-radius: 15px;
+  border-width: 4px;
+  border-color: rgb(144, 200, 172);
+  background-color: rgb(245, 240, 187);
+  width: 100px;
+  height: 25px;
+  cursor: pointer;
+  font-family: sans-serif;
+}
+
+.hide {
+  display: none;
 }

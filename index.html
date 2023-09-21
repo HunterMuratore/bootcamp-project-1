@@ -13,7 +13,7 @@
   <header>
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="https://bulma.io">
+        <a class="navbar-item"  href="https://bulma.io">
           <!--This would be our logo or picture relevaant to this APP -->
           <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
         </a>
@@ -31,7 +31,7 @@
             Home
           </a>
 
-          <a class="navbar-item modal">
+          <a class="navbar-item open-Modal-Button">
             Documentation
           </a>
 
@@ -40,7 +40,7 @@
               More
             </a>
 
-            <div class="navbar-dropdown">
+            <div class="navbar-dropdown open-Modal-Button">
               <a class="navbar-item">
                 About
               </a>
@@ -74,13 +74,19 @@
     </nav>
   </header>
 
-  <div class="modal">
-    <div class="modal-inner">
-      sample content
-      <div class="modal-title">Some modal title</div>
-      <button class="modal-close" type="button">
-        <span class="icons"></span>
-      </button>
+  <div class="modal hide">
+    <div class="modal-background has-background-white	hsl(0, 0%, 100%)"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Modal title</p>
+        <!-- <button class="delete" aria-label="close"></button> -->
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->This will be information about The Devs.
+      </section>
+      <footer class="modal-card-foot">
+        <button class="close-Modal-Button is-large">Close</button>
+      </footer>
     </div>
   </div>
 
