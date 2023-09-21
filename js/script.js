@@ -10,9 +10,30 @@ function generateMapMarkers(results, status) {
 }
 
 function createMarker(place) {
-  new google.maps.Marker({
+  var marker = new google.maps.Marker({
     map: map,
     position: place.geometry.location
+  });
+
+  var latLng = place.geometry.location.lat() + ',' + place.geometry.location.lng();
+  var googleMapsUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(latLng);
+
+  var html = `
+  <div>
+    <strong>${place.name}</strong>
+    <br>
+    Address: ${place.formatted_address}
+    <br>
+    <a href="${googleMapsUrl}" target="_blank">Directions</a>
+  </div>
+  `;
+
+  var infoWindow = new google.maps.InfoWindow({
+    content: html
+  });
+
+  marker.addListener('click', function() {
+    infoWindow.open(map, marker);
   });
 }
 
@@ -22,6 +43,17 @@ function getHikingTrails() {
     radius: '5000',
     query: 'hiking trails'
   };
+
+  service.textSearch(request, (results, status) => {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      // Loop through 'results' to get details about nearby hiking locations
+      for (const place of results) {
+        // console.log(place.name, place.geometry.location, place.rating, place.photos);
+        console.log(place);
+        // You can extract other details like photos, ratings, etc., from 'place'
+      }
+    }
+  });
 
   service.textSearch(request, generateMapMarkers);
 }
