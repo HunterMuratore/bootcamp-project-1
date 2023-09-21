@@ -19,20 +19,34 @@ function createMarker(place) {
   var googleMapsUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(latLng);
 
   var html = `
-  <div>
+  <div class="infoWindow">
     <strong>${place.name}</strong>
+    Rating: ${place.rating}
     <br>
+    <div class="address">
     Address: ${place.formatted_address}
+    </div>
+  
     <br>
-    <a href="${googleMapsUrl}" target="_blank">Directions</a>
-  </div>
-  `;
+    <button class="hikeBtn">Hike</button>
+    ${ /* <a href="${googleMapsUrl}" target="_blank">Directions</a> */ ''}
+    <img class="infoLink" src="${getPhotoUrl(place)}">
+  </div>`;
+
+  function getPhotoUrl(place) {
+    if (place.photos && place.photos.length > 0) {
+      var photo = place.photos[0];
+      return photo.getUrl({ maxWidth: 400, maxHeight: 400 });
+    } else {
+      return 'placeholder.jpg'; // Replace with a placeholder image URL
+    }
+  }
 
   var infoWindow = new google.maps.InfoWindow({
     content: html
   });
 
-  marker.addListener('click', function() {
+  marker.addListener('click', function () {
     infoWindow.open(map, marker);
   });
 }
