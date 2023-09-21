@@ -1,5 +1,6 @@
 var map;
 var service;
+var hikeThisTrail = $('#hike-this-trail');
 
 function generateMapMarkers(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -49,7 +50,7 @@ function getHikingTrails() {
       // Loop through 'results' to get details about nearby hiking locations
       for (const place of results) {
         // console.log(place.name, place.geometry.location, place.rating, place.photos);
-        console.log(place);
+        // console.log(place);
         // You can extract other details like photos, ratings, etc., from 'place'
       }
     }
@@ -65,7 +66,6 @@ function getLocation(callback) {
     })
   }
 }
-
 
 function initMap() {
   // Set the location (City or Latitude/Longitude)
@@ -84,3 +84,71 @@ function initMap() {
     getHikingTrails();
   });
 }
+
+function hikeThisTrailSection() {
+  // Hide the home html
+  // Display the hike-this-trail html section
+  // Create div class=trail-details
+    // Append to it the trail name, trail rating by #users, trail address and directions
+  // Create div class=trail-image
+    // Append to it the google image of the trail
+  // Create div class=weather
+    // Get weather data from an api and display the one-day weather report at the trails location  
+} 
+
+function addTrailDetails() {
+
+}
+
+function addWeatherData(weatherData) {
+  // Create a weather-data div 
+  var weatherDataDiv = $('<div>').addClass('weather-data tile is-child');
+  // Construct the inner HTML of weather-data div using Bulma tile classes
+  var iconUrl = `https://openweathermap.org/img/w/${weatherData.iconCode}.png`;
+  var weatherDataInfo = `
+    <h2>Weather at this trail</h2>
+    <p>Temperature: ${weatherData.temperature}°F</p>
+    <p>Description: ${weatherData.description}</p>
+    <p>Humidity: ${weatherData.humidity}</p>
+    <p>Wind Speed: ${weatherData.windSpeed} mph</p>
+    <p>Feels Like: ${weatherData.feelsLike}°F</p>
+    <img src="${iconUrl}" alt="Weather Icon">
+    `;
+  
+  
+  weatherDataDiv.append(weatherDataInfo);
+  hikeThisTrail.append(weatherDataDiv);
+}
+
+function getWeatherData(lat, lon) {
+  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=f15b9497c6b6f8a664cbf171c926c169`;
+
+  $.get(apiUrl, function(data) {
+      var weatherData = {
+        temperature: Math.floor(data.main.temp),
+        humidity: data.main.humidity,
+        feelsLike: Math.floor(data.main.feels_like),
+        windSpeed: data.wind.speed,
+        description: data.weather[0].description,
+        iconCode: data.weather[0].icon
+      }
+      
+      // console.log(temperature, description, data, iconUrl);
+
+      addWeatherData(weatherData);
+
+      // var weatherData = `
+      //     <h2>Weather at this trail</h2>
+      //     <p>Temperature: ${weatherData.temperature}°F</p>
+      //     <p>Description: ${weatherData.description}</p>
+      //     <p>Humidity: ${weatherData.humidity}</p>
+      //     <p>Wind Speed: ${weatherData.windSpeed} mph</p>
+      //     <p>Feels Like: ${weatherData.feelsLike}°F</p>
+      //     <img src="${iconUrl}" alt="Weather Icon">
+      // `;
+
+      // $('.weather-data').html(weatherData);
+  });
+}
+
+getWeatherData(40.602230, -74.689911);
