@@ -29,5 +29,20 @@ img {
 #map {
     height: 500px;
     width: 500px;
-    display: none;
+}
+
+.bg-yellow {
+  background-color: var(--theme-color-yellow);
+}
+
+.bg-green {
+  background-color: var(--theme-color-green);
+}
+
+.bg-teal {
+  background-color: var(--theme-color-teal);
+}
+
+.bg-blue {
+  background-color: var(--theme-color-blue);
 }

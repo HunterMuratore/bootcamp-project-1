@@ -1,6 +1,8 @@
 var map;
 var service;
+var mapSection = $('#map');
 var hikeThisTrail = $('#hike-this-trail');
+var detailsDiv = $('.details');
 
 function generateMapMarkers(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -20,14 +22,17 @@ function createMarker(place) {
   var googleMapsUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(latLng);
 
   var html = `
-  <div>
+  <div class="infoWindow">
     <strong>${place.name}</strong>
+    Rating: ${place.rating}
     <br>
-    Address: ${place.formatted_address}
-    <br>
-    <a href="${googleMapsUrl}" target="_blank">Directions</a>
-  </div>
-  `;
+    <div class="address">
+      Address: ${place.formatted_address}
+    </div>
+    <button class="hikeBtn">Hike</button>
+  </div>`;
+
+  addTrailDetails(place.name, place.rating, place.user_ratings_total, place.formatted_address, googleMapsUrl);
 
   var infoWindow = new google.maps.InfoWindow({
     content: html
@@ -45,12 +50,13 @@ function getHikingTrails() {
     query: 'hiking trails'
   };
 
+  // REMOVE THIS BEFORE MERGING
   service.textSearch(request, (results, status) => {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       // Loop through 'results' to get details about nearby hiking locations
       for (const place of results) {
         // console.log(place.name, place.geometry.location, place.rating, place.photos);
-        // console.log(place);
+        console.log(place);
         // You can extract other details like photos, ratings, etc., from 'place'
       }
     }
@@ -87,37 +93,55 @@ function initMap() {
 
 function hikeThisTrailSection() {
   // Hide the home html
+  mapSection.css('display', 'none');
   // Display the hike-this-trail html section
   // Create div class=trail-details
     // Append to it the trail name, trail rating by #users, trail address and directions
   // Create div class=trail-image
     // Append to it the google image of the trail
   // Create div class=weather
-    // Get weather data from an api and display the one-day weather report at the trails location  
+    // Get weather data from an api and display the one-day weather report at the   trails location  
 } 
 
-function addTrailDetails() {
+function addTrailDetails(name, rating, users, address, directions) {
+  // Create a trail-detail div
+  var trailDetailsDiv = $('<div>').addClass('trail-details bg-green tile is-child box');
+  
+  // Construct the inner HTML of trail-detail div
+  var trailDetailsInfo =`
+    <h2 class="title">${name}</h2>
+    <div class="mx-4">
+      <p>Trail Rating: ${rating}/5 by ${users} users</p>
+      <a href="${directions}">${address}</a>
+    </div>
+  `;
 
+  trailDetailsDiv.append(trailDetailsInfo);
+  detailsDiv.append(trailDetailsDiv);
 }
 
 function addWeatherData(weatherData) {
   // Create a weather-data div 
-  var weatherDataDiv = $('<div>').addClass('weather-data tile is-child');
-  // Construct the inner HTML of weather-data div using Bulma tile classes
+  var weatherDataDiv = $('<div>').addClass('weather-data bg-yellow tile is-child box');
+  // Construct the inner HTML of weather-data div
   var iconUrl = `https://openweathermap.org/img/w/${weatherData.iconCode}.png`;
   var weatherDataInfo = `
-    <h2>Weather at this trail</h2>
-    <p>Temperature: ${weatherData.temperature}°F</p>
-    <p>Description: ${weatherData.description}</p>
-    <p>Humidity: ${weatherData.humidity}</p>
-    <p>Wind Speed: ${weatherData.windSpeed} mph</p>
-    <p>Feels Like: ${weatherData.feelsLike}°F</p>
-    <img src="${iconUrl}" alt="Weather Icon">
+    <h2 class="title">Weather at this trail</h2>
+    <div class="columns">
+      <div class="column mx-4">
+        <p>Temperature: ${weatherData.temperature}°F</p>
+        <p>Conditions: ${weatherData.condition}</p>
+        <p>Humidity: ${weatherData.humidity}</p>
+        <p>Wind Speed: ${weatherData.windSpeed} mph</p>
+      </div>
+      <div class="column mx-4">
+        <p>Feels Like: ${weatherData.feelsLike}°F<img src="${iconUrl}" alt="Weather Icon"></p>
+      </div>
+    </div>
     `;
   
-  
   weatherDataDiv.append(weatherDataInfo);
-  hikeThisTrail.append(weatherDataDiv);
+  detailsDiv.append(weatherDataDiv);
 }
 
 function getWeatherData(lat, lon) {
@@ -129,25 +153,11 @@ function getWeatherData(lat, lon) {
         humidity: data.main.humidity,
         feelsLike: Math.floor(data.main.feels_like),
         windSpeed: data.wind.speed,
-        description: data.weather[0].description,
+        condition: data.weather[0].description,
         iconCode: data.weather[0].icon
       }
-      
-      // console.log(temperature, description, data, iconUrl);
 
-      addWeatherData(weatherData);
-
-      // var weatherData = `
-      //     <h2>Weather at this trail</h2>
-      //     <p>Temperature: ${weatherData.temperature}°F</p>
-      //     <p>Description: ${weatherData.description}</p>
-      //     <p>Humidity: ${weatherData.humidity}</p>
-      //     <p>Wind Speed: ${weatherData.windSpeed} mph</p>
-      //     <p>Feels Like: ${weatherData.feelsLike}°F</p>
-      //     <img src="${iconUrl}" alt="Weather Icon">
-      // `;
-
-      // $('.weather-data').html(weatherData);
+    addWeatherData(weatherData);
   });
 }
 
