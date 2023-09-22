@@ -2,8 +2,8 @@
 :root {
     --theme-color-yellow: rgb(245, 240, 187);
     --theme-color-green: rgb(196, 223, 170);
-    --theme-color-teal: rgb(144, 200, 172);
-    --theme-color-blue: rgb(115, 169, 173);
+    --theme-color-teal: rgb(147, 228, 187);
+    --theme-color-blue: rgb(127, 229, 236);
 }
 
 /* GLOBAL RESETS */
@@ -25,8 +25,42 @@ img {
   height: auto;
 }
 
-/* CUSTOM CLASSES */
-#map {
-    height: 500px;
+/* CUSTOM STYLES */
+
+#hero {
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url("../images/pexels-photo-172510.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 900px;
+    max-width: 650px;
+}
+
+#hero .blurb {
+    color: var(--theme-color-blue);
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)); 
+    align-items: center;
+    text-align: center;
     width: 500px;
+    margin: auto;
+    margin-top: 180px;
+    padding: 20px;
+}
+
+#hero h3 {
+    font-size: 140%;
+    font-weight: bold;
+}
+
+#hero h2 {
+    padding-top: 40px;
+    text-align: center;
+    color: var(--theme-color-teal);
+    font-size: 200%;
+    font-weight: bold;
+}
+
+#map {
+    min-height: 500px;
+    min-width: 100%;
 }
