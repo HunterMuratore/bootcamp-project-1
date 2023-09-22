@@ -98,7 +98,7 @@ function hikeModal() {
 
   // Gather weather data and trail details and construct respective html sections
   getWeatherData(placeData.geometry.location.lat(), placeData.geometry.location.lng());
-  addTrailDetails(placeData.name, placeData.rating, placeData.user_ratings_total, placeData.formatted_address);
+  addTrailDetails(placeData.name, placeData.rating, placeData.user_ratings_total, placeData.formatted_address, placeData.geometry.location.lat(), placeData.geometry.location.lng());
 
   $('#hike-modal').addClass('is-active');
 
@@ -106,7 +106,10 @@ function hikeModal() {
   modalClose.on('click', hideModal);
 } 
 
-function addTrailDetails(name, rating, users, address) {
+function addTrailDetails(name, rating, users, address, lat, lng) {
+  var latLng = lat + ',' + lng;
+  var googleMapsUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(latLng);
+  
   // Create a trail-detail div
   var trailDetailsDiv = $('<div>').addClass('trail-details bg-green tile is-child box');
   
@@ -114,7 +117,7 @@ function addTrailDetails(name, rating, users, address) {
   var trailDetailsInfo = `
     <h2 class="title">${name}</h2>
     <div class="mx-4">
-      <p>${address}</p>
+      <a href="${googleMapsUrl}" target="_blank">${address}</a>
       <p>Trail Rating: ${rating}/5 by ${users} users</p>
     </div>
   `;
