@@ -5,6 +5,7 @@ var mapSection = $('#map');
 var hikeThisTrail = $('#hike-this-trail');
 var detailsDiv = $('.details');
 var trailImgDiv = $('.trail-image');
+var modalDetails = $('.modal-details');
 
 function generateMapMarkers(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -87,9 +88,22 @@ function initMap() {
   });
 }
 
-function hikeThisTrailSection() { 
+function hideModal() {
+  $('#hike-modal').removeClass('is-active');
+}
+
+function hikeModal() { 
+  // Empty the modal details html section
+  modalDetails.empty();
+
+  // Gather weather data and trail details and construct respective html sections
   getWeatherData(placeData.geometry.location.lat(), placeData.geometry.location.lng());
   addTrailDetails(placeData.name, placeData.rating, placeData.user_ratings_total, placeData.formatted_address);
+
+  $('#hike-modal').addClass('is-active');
+
+  var modalClose = $('.modal-close');
+  modalClose.on('click', hideModal);
 } 
 
 function addTrailDetails(name, rating, users, address) {
@@ -106,7 +120,7 @@ function addTrailDetails(name, rating, users, address) {
   `;
 
   trailDetailsDiv.append(trailDetailsInfo);
-  detailsDiv.append(trailDetailsDiv);
+  modalDetails.append(trailDetailsDiv);
 }
 
 function addWeatherData(weatherData) {
@@ -130,7 +144,7 @@ function addWeatherData(weatherData) {
     `;
   
   weatherDataDiv.append(weatherDataInfo);
-  detailsDiv.append(weatherDataDiv);
+  modalDetails.append(weatherDataDiv);
 }
 
 function getWeatherData(lat, lon) {
@@ -151,4 +165,4 @@ function getWeatherData(lat, lon) {
   });
 }
 
-$(document.body).on('click', '.hikeBtn', hikeThisTrailSection);
+$(document.body).on('click', '.hikeBtn', hikeModal);

@@ -46,3 +46,7 @@ img {
 .bg-blue {
   background-color: var(--theme-color-blue);
 }
+
+.modal-close {
+  background-color: var(--theme-color-blue);
+}
