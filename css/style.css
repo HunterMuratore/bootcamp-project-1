@@ -45,3 +45,8 @@ img {
     font-size: 200%;
     font-weight: bold;
 }
+
+#map {
+    height: 500px;
+    width: 500px;
+}
