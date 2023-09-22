@@ -94,6 +94,26 @@ img {
     align-items: center;
     text-align: center;
     width: 500px;
+}
+
+.bg-yellow {
+  background-color: var(--theme-color-yellow);
+}
+
+.bg-green {
+  background-color: var(--theme-color-green);
+}
+
+.bg-teal {
+  background-color: var(--theme-color-teal);
+}
+
+.bg-blue {
+  background-color: var(--theme-color-blue);
+}
+
+.modal-close {
+  background-color: var(--theme-color-blue);
     margin: auto;
     margin-top: 180px;
     padding: 20px;
