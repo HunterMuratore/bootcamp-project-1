@@ -41,15 +41,15 @@ img {
 }
 
 .modal-card-head {
-  background-color: var(--theme-color-yellow);
+  background-color: rgb(245, 240, 187);
 }
 
 .modal-card-body {
-  background-color: var(--theme-color-green);
+  background-color: rgb(196, 223, 170);
 }
 
 .modal-card-foot {
-  background-color: var(--theme-color-teal);
+  background-color:  rgb(144, 200, 172);
 }
 
 
@@ -65,8 +65,8 @@ img {
   border-style: none;
   border-radius: 15px;
   border-width: 4px;
-  border-color: var(--theme-color-teal);
-  background-color:var(--theme-color-yellow);
+  border-color: rgb(144, 200, 172);
+  background-color: rgb(245, 240, 187);
   width: 100px;
   height: 25px;
   cursor: pointer;
