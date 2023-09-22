@@ -1,5 +1,6 @@
 var map;
 var service;
+var currentInfoWindow = null;
 
 function generateMapMarkers(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -24,9 +25,8 @@ function createMarker(place) {
     Rating: ${place.rating}
     <br>
     <div class="address">
-    Address: ${place.formatted_address}
+    <strong>Address:</strong> ${place.formatted_address}
     </div>
-  
     <br>
     <button class="hikeBtn">Hike</button>
     ${ /* <a href="${googleMapsUrl}" target="_blank">Directions</a> */ ''}
@@ -38,7 +38,7 @@ function createMarker(place) {
       var photo = place.photos[0];
       return photo.getUrl({ maxWidth: 400, maxHeight: 400 });
     } else {
-      return 'placeholder.jpg'; // Replace with a placeholder image URL
+      return './images/nature-placeholder.jpg'; // Replace with a placeholder image URL
     }
   }
 
@@ -47,8 +47,17 @@ function createMarker(place) {
   });
 
   marker.addListener('click', function () {
+    // Close the previous info window if it's currently displayed
+    if (currentInfoWindow) {
+      currentInfoWindow.close()
+    }
+
+    // Open new info window
     infoWindow.open(map, marker);
+    currentInfoWindow = infoWindow;
   });
+
+
 }
 
 function getHikingTrails() {
