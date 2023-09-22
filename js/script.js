@@ -25,10 +25,10 @@ function createMarker(place) {
     Rating: ${place.rating}
     <br>
     <div class="address">
-    <strong>Address:</strong> ${place.formatted_address}
+    <strong>Address:</strong> <a href="${googleMapsUrl}" target="_blank">${place.formatted_address}</a>
     </div>
     <br>
-    <button class="hikeBtn">Hike</button>
+    <button class="hikeBtn">Details</button>
     ${ /* <a href="${googleMapsUrl}" target="_blank">Directions</a> */ ''}
     <img class="infoLink" src="${getPhotoUrl(place)}">
   </div>`;
