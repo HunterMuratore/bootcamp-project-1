@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,25 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe5kKUSlV75DXF2-O4sYHZk7Hj3s561p8&libraries=places&callback=initMap"
     defer></script>
 </head>
+
 <body>
+
+  <!-- Will need to add open-Modal-Button to elemeent(s) we want to be a modal -->
+  <div class="modal hide">
+    <div class="modal-background has-background-white	hsl(0, 0%, 100%)"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+         <p class="modal-card-title">Modal title</p> <!--make this dynamic with JS-->
+      </header>
+      <section class="modal-card-body">
+        <!-- Content dynamic with the hike modal? ... -->This will be information about the devs/trail
+      </section>
+      <footer class="modal-card-foot">
+        <button class="close-Modal-Button is-large">Close</button>
+      </footer>
+    </div>
+  </div>
+
     <main class="columns">
         <section id="hero">
             <br>
@@ -31,6 +50,8 @@
         <span>Background image provided by Pexels Photos</span>
     </footer>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="js/modal.js"></script>
     <script src="js/script.js"></script>
 </body>
+
 </html>
