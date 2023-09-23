@@ -24,8 +24,8 @@ ul {
 }
 
 img {
-  max-width: 100%;
-  height: auto;
+  max-height: 250px;
+  margin: 0 auto;
 }
 
 /* CUSTOM STYLES */
@@ -186,4 +186,31 @@ body {
 #map {
   min-height: 500px;
   min-width: 100%;
+}
+
+.infoWindow {
+  display: flex;
+  flex-direction: column;
+}
+
+.address {
+  margin: 10px auto -12px auto;
+}
+
+.hikeBtn {
+  background-color: var(--theme-color-yellow);
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  padding: 6px 16px;
+  margin: 0 0 4px 0;
+}
+
+.hikeBtn:hover {
+  background-color: var(--theme-color-green);
+}
+
+.hikeBtn:active {
+  background-color: var(--theme-color-teal);
 }

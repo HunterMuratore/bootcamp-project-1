@@ -1,6 +1,7 @@
 var map;
 var service;
 var placeData;
+var currentInfoWindow = null;
 var mapSection = $('#map');
 var hikeThisTrail = $('#hike-this-trail');
 var detailsDiv = $('.details');
@@ -15,6 +16,15 @@ function generateMapMarkers(results, status) {
   }
 }
 
+function getPhotoUrl(place) {
+  if (place.photos && place.photos.length > 0) {
+    var photo = place.photos[0];
+    return photo.getUrl({ maxWidth: 400, maxHeight: 400 });
+  } else {
+    return './images/nature-placeholder.jpg'; // Replace with a placeholder image URL
+  }
+}
+
 function createMarker(place) {
   // Create a market for the current place
   var marker = new google.maps.Marker({
@@ -26,28 +36,33 @@ function createMarker(place) {
   var latLng = place.geometry.location.lat() + ',' + place.geometry.location.lng();
   var googleMapsUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(latLng);
 
-  // Construct the html for the info window
+    // Construct the html for the info window
   var infoDiv = $('<div>').addClass('infoWindow').html(`
     <strong>${place.name}</strong>
     Rating: ${place.rating}
     <br>
     <div class="address">
-      Address: ${place.formatted_address}
+    <strong>Address:</strong> <a href="${googleMapsUrl}" target="_blank">${place.formatted_address}</a>
     </div>
     <br>
-    <a href=${googleMapsUrl} target="_blank">Directions</a>
-    <br>
-    <button class="hikeBtn">Hike</button>
-  `);
+    <button class="hikeBtn">Details</button>
+    <img class="infoLink" src="${getPhotoUrl(place)}">
+   `;
 
   // Add the html to the info window
   var infoWindow = new google.maps.InfoWindow({
     content: infoDiv.html()
   });
 
-  // Open the info window on marker click
-  marker.addListener('click', function() {
+  marker.addListener('click', function () {
+    // Close the previous info window if it's currently displayed
+    if (currentInfoWindow) {
+      currentInfoWindow.close()
+    }
+
+    // Open new info window
     infoWindow.open(map, marker);
+    currentInfoWindow = infoWindow;
     placeData = place;
   });
 }
