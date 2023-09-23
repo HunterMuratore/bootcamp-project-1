@@ -1,6 +1,12 @@
 var map;
 var service;
+var placeData;
 var currentInfoWindow = null;
+var mapSection = $('#map');
+var hikeThisTrail = $('#hike-this-trail');
+var detailsDiv = $('.details');
+var trailImgDiv = $('.trail-image');
+var modalDetails = $('.modal-details');
 
 function generateMapMarkers(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -10,17 +16,28 @@ function generateMapMarkers(results, status) {
   }
 }
 
+function getPhotoUrl(place) {
+  if (place.photos && place.photos.length > 0) {
+    var photo = place.photos[0];
+    return photo.getUrl({ maxWidth: 400, maxHeight: 400 });
+  } else {
+    return './images/nature-placeholder.jpg'; // Replace with a placeholder image URL
+  }
+}
+
 function createMarker(place) {
+  // Create a market for the current place
   var marker = new google.maps.Marker({
     map: map,
     position: place.geometry.location
   });
 
+  // Get the google maps url for the place to be used in the directions link
   var latLng = place.geometry.location.lat() + ',' + place.geometry.location.lng();
   var googleMapsUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(latLng);
 
-  var html = `
-  <div class="infoWindow">
+    // Construct the html for the info window
+  var infoDiv = $('<div>').addClass('infoWindow').html(`
     <strong>${place.name}</strong>
     Rating: ${place.rating}
     <br>
@@ -29,21 +46,12 @@ function createMarker(place) {
     </div>
     <br>
     <button class="hikeBtn">Details</button>
-    ${ /* <a href="${googleMapsUrl}" target="_blank">Directions</a> */ ''}
     <img class="infoLink" src="${getPhotoUrl(place)}">
-  </div>`;
+   `;
 
-  function getPhotoUrl(place) {
-    if (place.photos && place.photos.length > 0) {
-      var photo = place.photos[0];
-      return photo.getUrl({ maxWidth: 400, maxHeight: 400 });
-    } else {
-      return './images/nature-placeholder.jpg'; // Replace with a placeholder image URL
-    }
-  }
-
+  // Add the html to the info window
   var infoWindow = new google.maps.InfoWindow({
-    content: html
+    content: infoDiv.html()
   });
 
   marker.addListener('click', function () {
@@ -55,9 +63,8 @@ function createMarker(place) {
     // Open new info window
     infoWindow.open(map, marker);
     currentInfoWindow = infoWindow;
+    placeData = place;
   });
-
-
 }
 
 function getHikingTrails() {
@@ -66,17 +73,6 @@ function getHikingTrails() {
     radius: '5000',
     query: 'hiking trails'
   };
-
-  service.textSearch(request, (results, status) => {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      // Loop through 'results' to get details about nearby hiking locations
-      for (const place of results) {
-        // console.log(place.name, place.geometry.location, place.rating, place.photos);
-        console.log(place);
-        // You can extract other details like photos, ratings, etc., from 'place'
-      }
-    }
-  });
 
   service.textSearch(request, generateMapMarkers);
 }
@@ -88,7 +84,6 @@ function getLocation(callback) {
     })
   }
 }
-
 
 function initMap() {
   // Set the location (City or Latitude/Longitude)
@@ -107,3 +102,85 @@ function initMap() {
     getHikingTrails();
   });
 }
+
+function hideModal() {
+  $('#hike-modal').removeClass('is-active');
+}
+
+function hikeModal() { 
+  // Empty the modal details html section
+  modalDetails.empty();
+
+  // Gather weather data and trail details and construct respective html sections
+  getWeatherData(placeData.geometry.location.lat(), placeData.geometry.location.lng());
+  addTrailDetails(placeData.name, placeData.rating, placeData.user_ratings_total, placeData.formatted_address, placeData.geometry.location.lat(), placeData.geometry.location.lng());
+
+  $('#hike-modal').addClass('is-active');
+
+  var modalClose = $('.modal-close');
+  modalClose.on('click', hideModal);
+} 
+
+function addTrailDetails(name, rating, users, address, lat, lng) {
+  var latLng = lat + ',' + lng;
+  var googleMapsUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(latLng);
+  
+  // Create a trail-detail div
+  var trailDetailsDiv = $('<div>').addClass('trail-details bg-green tile is-child box');
+  
+  // Construct the inner HTML of trail-detail div
+  var trailDetailsInfo = `
+    <h2 class="title">${name}</h2>
+    <div class="mx-4">
+      <a href="${googleMapsUrl}" target="_blank">${address}</a>
+      <p>Trail Rating: ${rating}/5 by ${users} users</p>
+    </div>
+  `;
+
+  trailDetailsDiv.append(trailDetailsInfo);
+  modalDetails.append(trailDetailsDiv);
+}
+
+function addWeatherData(weatherData) {
+  // Create a weather-data div 
+  var weatherDataDiv = $('<div>').addClass('weather-data bg-yellow tile is-child box');
+  // Construct the inner HTML of weather-data div
+  var iconUrl = `https://openweathermap.org/img/w/${weatherData.iconCode}.png`;
+  var weatherDataInfo = `
+    <h2 class="title">Weather at this trail</h2>
+    <div class="columns">
+      <div class="column mx-4">
+        <p>Temperature: ${weatherData.temperature}°F</p>
+        <p>Conditions: ${weatherData.condition}</p>
+        <p>Humidity: ${weatherData.humidity}</p>
+        <p>Wind Speed: ${weatherData.windSpeed} mph</p>
+      </div>
+      <div class="column mx-4">
+        <p>Feels Like: ${weatherData.feelsLike}°F<img src="${iconUrl}" alt="Weather Icon"></p>
+      </div>
+    </div>
+    `;
+  
+  weatherDataDiv.append(weatherDataInfo);
+  modalDetails.append(weatherDataDiv);
+}
+
+function getWeatherData(lat, lon) {
+  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=f15b9497c6b6f8a664cbf171c926c169`;
+
+  // Get all of the weather data for their location and put it in an object to be sent to addWeatherData()
+  $.get(apiUrl, function(data) {
+      var weatherData = {
+        temperature: Math.floor(data.main.temp),
+        humidity: data.main.humidity,
+        feelsLike: Math.floor(data.main.feels_like),
+        windSpeed: data.wind.speed,
+        condition: data.weather[0].description,
+        iconCode: data.weather[0].icon
+      }
+
+  addWeatherData(weatherData);
+  });
+}
+
+$(document.body).on('click', '.hikeBtn', hikeModal);
