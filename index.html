@@ -5,13 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hiking Buddy</title>
+    <!-- Compiled and minified CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe5kKUSlV75DXF2-O4sYHZk7Hj3s561p8&libraries=places&callback=initMap"
     defer></script>
 </head>
-<body>
+<body>  
+     <nav>
+       <div class="navbar-fixed">
+        <div class="nav-wrapper">
+          <ul class="left">
+            <li>
+              <img class="logo" src="https://t4.ftcdn.net/jpg/05/63/92/89/360_F_563928947_8NY1rRlotf0bbZjEyn97r6QMs4w0a8k4.jpg" alt="hiking clip art of trees">
+            </li>
+            <li class="active">
+              <a id="go-home" class="btn" href="https://www.google.com/">Home</a>
+            </li>
+          </ul>
+          <ul id="mobile-nav" class="right">
+            <li class="active">
+              <a class="btn" href="https://www.google.com/">Recent Trails<i class="material-icons left">map</i></a>
+            </li>
+            <li class="active">
+              <a class="btn" href="https://www.google.com/">Favorite Trails<i class="material-icons right">favorite_border</i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <main class="columns">
         <section id="hero">
             <br>
@@ -19,7 +45,6 @@
                 <h3>What is Hiking Buddy?</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt necessitatibus voluptas quas ex, hic natus quisquam earum accusantium consectetur quos eligendi, velit tempora aperiam rerum, asperiores similique in cupiditate cumque.</p>    
             </div>
-            
             <h2 class="block">Where Will You Find Yourself?</h2>
             <div class="columns is-mobile">
                 <input class="input column is-offset-1 is-6" type="text" placeholder="Enter city or zip code">
@@ -41,7 +66,7 @@
     </section> -->
 
     <!-- Will need to add open-Modal-Button to elemeent(s) we want to be a modal -->
-    <div class="modal hide">
+      <div class="modal hide">
         <div class="modal-background has-background-white	hsl(0, 0%, 100%)"></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -54,23 +79,29 @@
             <button class="close-Modal-Button is-large">Close</button>
           </footer>
         </div>
-    </div>
+      </div>
 
-    <div id="hike-modal" class="modal">
+      <div id="hike-modal" class="modal">
         <div class="modal-background-background-color hsl(0, 0%, 100%)"></div>
         <div class="modal-content bg-teal is-ancestor">
           <div class="modal-details tile px-6 py-6 is-vertical is-parent">
           </div>
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
-    </div> 
+      </div> 
 
-    <footer>
-        <span>Background image provided by Pexels Photos</span>
-    </footer>
+      <footer class="page-footer">
+        <div class="col s12">
+          <ul>
+            <li><a id="about-btn" class="btn" href="#!">About Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-copyright">
+          <p class="copy-sign">&copy:2023</p>
+        </div>
+      </footer>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="js/modal.js"></script>
     <script src="js/script.js"></script>
 </body>
-
 </html>

@@ -29,6 +29,57 @@ img {
 }
 
 /* CUSTOM STYLES */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.nav-wrapper{
+  background-color:rgb(245, 240, 187);
+  z-index: -1;
+}
+
+.btn:hover {
+  border-style:solid;
+  border-width: 1px;
+  box-shadow: 10px 10px rgb(144, 200, 172); 
+  border-radius: 50%;
+  }
+
+.logo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 8%;
+  width: 60px;
+  z-index: -1;
+  border-style: groove;
+  border-radius: 50%;
+  border-color: rgb(115, 169, 173);
+}
+
+#go-home{
+  display:fixed;
+  margin-left: 80px;
+  width: 65%;
+}
+
+.page-footer {
+  background-color:rgb(245, 240, 187);
+  z-index: -1;
+  margin-top: auto; 
+  height: 50%;
+} 
+
+#about-btn {
+  margin-left: 50%;
+}
+
+.copy-sign {
+  color: rgb(115, 169, 173);
+  font-weight: 600;
+}
 
 .modal {
   position: absolute;
@@ -80,20 +131,20 @@ img {
 }
 
 #hero {
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url("../images/pexels-photo-172510.jpeg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 900px;
-    max-width: 650px;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url("../images/pexels-photo-172510.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 900px;
+  max-width: 650px;
 }
 
 #hero .blurb {
-    color: var(--theme-color-blue);
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)); 
-    align-items: center;
-    text-align: center;
-    width: 500px;
+  color: var(--theme-color-blue);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)); 
+  align-items: center;
+  text-align: center;
+  width: 500px;
 }
 
 .bg-yellow {
@@ -114,25 +165,25 @@ img {
 
 .modal-close {
   background-color: var(--theme-color-blue);
-    margin: auto;
-    margin-top: 180px;
-    padding: 20px;
+  margin: auto;
+  margin-top: 180px;
+  padding: 20px;
 }
 
 #hero h3 {
-    font-size: 140%;
-    font-weight: bold;
+  font-size: 140%;
+  font-weight: bold;
 }
 
 #hero h2 {
-    padding-top: 40px;
-    text-align: center;
-    color: var(--theme-color-teal);
-    font-size: 200%;
-    font-weight: bold;
+  padding-top: 40px;
+  text-align: center;
+  color: var(--theme-color-teal);
+  font-size: 200%;
+  font-weight: bold;
 }
 
 #map {
-    min-height: 500px;
-    min-width: 100%;
+  min-height: 500px;
+  min-width: 100%;
 }
