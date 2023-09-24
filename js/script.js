@@ -7,6 +7,8 @@ var hikeThisTrail = $('#hike-this-trail');
 var detailsDiv = $('.details');
 var trailImgDiv = $('.trail-image');
 var modalDetails = $('.modal-details');
+var modal = $('#modal');
+var openModalButton = $('.open-Modal-Button');
 
 function generateMapMarkers(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -45,11 +47,15 @@ function createMarker(place) {
     <strong>Address:</strong> <a href="${googleMapsUrl}" target="_blank">${place.formatted_address}</a>
     </div>
     <br>
-    <button class="hikeBtn">Details</button>
+    <button class="hikeBtn open-Modal-Button" id="detailsBtn" data-target="hike-modal">Details</button>
     <img class="infoLink" src="${getPhotoUrl(place)}">
-   `;
+   `);
 
-  // Add the html to the info window
+   $('#deailsBtn').click(function() {
+    $('#hike-modal').addClass('is-active');
+   });
+
+    // Add the html to the info window
   var infoWindow = new google.maps.InfoWindow({
     content: infoDiv.html()
   });
