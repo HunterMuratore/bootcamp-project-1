@@ -47,7 +47,7 @@ function createMarker(place) {
     <br>
     <button class="hikeBtn">Details</button>
     <img class="infoLink" src="${getPhotoUrl(place)}">
-   `;
+   `);
 
   // Add the html to the info window
   var infoWindow = new google.maps.InfoWindow({
@@ -105,9 +105,11 @@ function initMap() {
 
 function hideModal() {
   $('#hike-modal').removeClass('is-active');
+  $('#hike-modal').addClass('hide');
 }
 
 function hikeModal() { 
+  console.log('click');
   // Empty the modal details html section
   modalDetails.empty();
 
@@ -116,10 +118,29 @@ function hikeModal() {
   addTrailDetails(placeData.name, placeData.rating, placeData.user_ratings_total, placeData.formatted_address, placeData.geometry.location.lat(), placeData.geometry.location.lng());
 
   $('#hike-modal').addClass('is-active');
+  $('#hike-modal').removeClass('hide');
 
   var modalClose = $('.modal-close');
   modalClose.on('click', hideModal);
+
+  var favoriteBtn = $('.favoriteBtn');
+  favoriteBtn.on('click', makeFavorite)
 } 
+
+function makeFavorite() {
+  var favoriteTrail = [
+    {
+      name: placeData.name,
+      rating: placeData.rating,
+      userTotal: placeData.user_ratings_total, 
+      address: placeData.formatted_address,
+      lat: placeData.geometry.location.lat(),
+      lng: placeData.geometry.location.lng()
+    }
+  ];
+
+  localStorage.setItem('trails', JSON.stringify(favoriteTrail));
+}
 
 function addTrailDetails(name, rating, users, address, lat, lng) {
   var latLng = lat + ',' + lng;
@@ -134,6 +155,7 @@ function addTrailDetails(name, rating, users, address, lat, lng) {
     <div class="mx-4">
       <a href="${googleMapsUrl}" target="_blank">${address}</a>
       <p>Trail Rating: ${rating}/5 by ${users} users</p>
+      <button class="favoriteBtn">Favorite Trail</button>
     </div>
   `;
 
