@@ -7,6 +7,7 @@ var hikeThisTrail = $('#hike-this-trail');
 var detailsDiv = $('.details');
 var trailImgDiv = $('.trail-image');
 var modalDetails = $('.modal-details');
+var favSection = $('#favorite-section');
 
 function generateMapMarkers(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -109,7 +110,6 @@ function hideModal() {
 }
 
 function hikeModal() { 
-  console.log('click');
   // Empty the modal details html section
   modalDetails.empty();
 
@@ -135,7 +135,7 @@ function makeFavorite() {
   // If there is no local storage item with key trails then initialize an empty array
   if (!favTrail) {
     favTrail= [];
-  }
+  };
 
   // Create the trail object that will be pushed to the array
   var trailDetails = {
@@ -143,8 +143,7 @@ function makeFavorite() {
     rating: placeData.rating,
     userTotal: placeData.user_ratings_total, 
     address: placeData.formatted_address,
-    lat: placeData.geometry.location.lat(),
-    lng: placeData.geometry.location.lng()
+    googleMapsUrl: 'https://www.google.com/maps?q=' + encodeURIComponent(placeData.geometry.location.lat() + ',' + placeData.geometry.location.lng())
   };
 
   // Check whether the isDuplicate variable is true or false based on whether the elements of trailDetails match any of the elements in the favTrail array
@@ -154,8 +153,7 @@ function makeFavorite() {
       existingTrail.rating === trailDetails.rating &&
       existingTrail.userTotal === trailDetails.userTotal &&
       existingTrail.address === trailDetails.address &&
-      existingTrail.lat === trailDetails.lat &&
-      existingTrail.lng === trailDetails.lng
+      existingTrail.googleMapsUrl === trailDetails.googleMapsUrl
     );
   }).length > 0;
 
@@ -164,6 +162,35 @@ function makeFavorite() {
     favTrail.push(trailDetails);
     localStorage.setItem('trails', JSON.stringify(favTrail));
   }
+
+  showFavorites();
+}
+
+function showFavorites() {
+  // Get their trails from local storage
+  var favTrail = JSON.parse(localStorage.getItem('trails'));
+
+  // If there is no local storage item with key trails then initialize an empty array
+  if (!favTrail) {
+    favTrail= [];
+  }
+
+  // Empty the HTML of the favorite section
+  favSection.empty();
+
+  favTrail.forEach(trail => {
+    var trailDetailsInfo = `
+      <div class="favorite-details bg-green is-vertical is-parent text-center p-6 mx-3 d-flex flex-column align-items-center justify-content-center box">
+        <h2 class="title">${trail.name}</h2>
+        <div class="mx-4">
+          <a href="${trail.googleMapsUrl}" target="_blank">${trail.address} </a>
+          <p>Trail Rating: ${trail.rating}/5 by ${trail.userTotal} users</p>
+        </div>
+      </div?
+    `;
+
+    favSection.append(trailDetailsInfo);
+  });
 }
 
 function addTrailDetails(name, rating, users, address, lat, lng) {
@@ -230,3 +257,5 @@ function getWeatherData(lat, lon) {
 }
 
 $(document.body).on('click', '.hikeBtn', hikeModal);
+
+showFavorites();
