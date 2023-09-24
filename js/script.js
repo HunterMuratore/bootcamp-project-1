@@ -127,19 +127,43 @@ function hikeModal() {
   favoriteBtn.on('click', makeFavorite)
 } 
 
+// Add their favorite trails to their local storage
 function makeFavorite() {
-  var favoriteTrail = [
-    {
-      name: placeData.name,
-      rating: placeData.rating,
-      userTotal: placeData.user_ratings_total, 
-      address: placeData.formatted_address,
-      lat: placeData.geometry.location.lat(),
-      lng: placeData.geometry.location.lng()
-    }
-  ];
+  // Get their trails from local storage
+  var favTrail = JSON.parse(localStorage.getItem('trails'));
 
-  localStorage.setItem('trails', JSON.stringify(favoriteTrail));
+  // If there is no local storage item with key trails then initialize an empty array
+  if (!favTrail) {
+    favTrail= [];
+  }
+
+  // Create the trail object that will be pushed to the array
+  var trailDetails = {
+    name: placeData.name,
+    rating: placeData.rating,
+    userTotal: placeData.user_ratings_total, 
+    address: placeData.formatted_address,
+    lat: placeData.geometry.location.lat(),
+    lng: placeData.geometry.location.lng()
+  };
+
+  // Check whether the isDuplicate variable is true or false based on whether the elements of trailDetails match any of the elements in the favTrail array
+  var isDuplicate = $.grep(favTrail, function(existingTrail) {
+    return (
+      existingTrail.name === trailDetails.name &&
+      existingTrail.rating === trailDetails.rating &&
+      existingTrail.userTotal === trailDetails.userTotal &&
+      existingTrail.address === trailDetails.address &&
+      existingTrail.lat === trailDetails.lat &&
+      existingTrail.lng === trailDetails.lng
+    );
+  }).length > 0;
+
+  if (!isDuplicate) {
+    // If the trail object is not already in the array, then add it and save the array to local storage
+    favTrail.push(trailDetails);
+    localStorage.setItem('trails', JSON.stringify(favTrail));
+  }
 }
 
 function addTrailDetails(name, rating, users, address, lat, lng) {
