@@ -130,6 +130,11 @@ body {
   font-family: sans-serif;
 }
 
+#hike-modal {
+  max-width: 800px;
+  max-height: 700px;
+}
+
 .hide {
   display: none;
 }
