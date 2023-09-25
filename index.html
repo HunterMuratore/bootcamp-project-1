@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hiking Buddy</title>
+  <title>Trails Near Me</title>
   <!-- Compiled and minified CSS -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -27,18 +27,18 @@
               src="https://t4.ftcdn.net/jpg/05/63/92/89/360_F_563928947_8NY1rRlotf0bbZjEyn97r6QMs4w0a8k4.jpg"
               alt="hiking clip art of trees">
           </li>
-          <li class="active">
+          <li>
             <a id="go-home" class="btn" href="#">Home</a>
           </li>
         </ul>
         <ul id="mobile-nav" class="right">
           <li class="active">
             <!-- Consider this moving to another html page or adding in JavaScript to move to display recent trails -->
-            <a class="btn" href="https://www.google.com/">Recent Trails<i class="material-icons left">map</i></a>
+            <!-- <a class="btn" href="https://www.google.com/">Recent Trails<i class="material-icons left">map</i></a> -->
           </li>
           <li class="active">
             <!-- Consider this moving to another html page or adding in JavaScript to move to display favorite trails -->
-            <a class="btn" href="https://www.google.com/">Favorite Trails<i
+            <a id="show-favorite-section" class="btn" href="#favorite-section">Favorite Trails<i
                 class="material-icons right">favorite_border</i></a>
           </li>
         </ul>
@@ -46,34 +46,23 @@
     </div>
   </nav>
 
-  <main class="columns">
-    <section id="hero">
-      <br>
-      <div class="blurb">
-        <h3>What is Hiking Buddy?</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt necessitatibus voluptas quas ex, hic natus
-          quisquam earum accusantium consectetur quos eligendi, velit tempora aperiam rerum, asperiores similique in
-          cupiditate cumque.</p>
-      </div>
-      <h2 class="block">Where Will You Find Yourself?</h2>
-      <div class="columns is-mobile">
-        <input class="input column is-offset-1 is-6 location-input" type="text" placeholder="Enter city or zip code">
-        <button class="button column is-offset-1 is-one-fifth" id="find-trail">Find A Trail</button>
-      </div>
-    </section>
+  <main id="hero" class="d-flex flex-column justify-content-center bg-blue">
+    <br>
+    <div class="blurb text-center">
+      <h3>What is Trails Near Me?</h3>
+      <p>Trails Near Me is an app which uses Google Maps API and openweathermap API to allow you to findall nearby hiking trails giving you details about the trail and the weather conditions at thetrail.</p>
+    </div>
+    <h2 class="block">Where Will You Find Yourself?</h2>
+    <!-- In future allow user to input a location and find trails around there -->
+    <!-- <div class="columns is-mobile">
+      <input class="input column is-offset-1 is-6 location-input" type="text" placeholder="Enter cityor zip code">
+      <button class="button column is-offset-1 is-one-fifth" id="find-trail">Find A Trail</button>
+    </div> -->
     <div id="map"></div>
   </main>
 
-  <!-- Turn into favorite section -->
-  <!-- <section id="hike-this-trail" class="tile bg-blue is-ancestor">
-        <div class="details tile px-6 pt-6 is-vertical is-parent">
-        </div>
-        <div class="trail-image tile px-6 pt-6 is-parent">
-            <div class="tile bg-teal is-child box">
-                <img src="" alt="Trail Image">
-            </div>
-        </div>
-    </section> -->
+  <section id="favorite-section" class="d-flex flex-wrap justify-content-center tile p-6 bg-blue is-ancestor hide">
+  </section>
 
   <div class="modal hide" id="modal">
     <div class="modal-background style-display: none;"></div>
@@ -90,34 +79,30 @@
           <li>Michael worked on implementing modals with two seperate frameworks, helped with some JavaScript logic and doing quality control.</li>
       </ul>
       </section>
-      <footer class="modal-card-foot">
+      <div class="modal-card-foot">
         <button class="close-Modal-Button is-large">Close</button>
-      </footer>
+        
+      </div>
     </div>
   </div>
 
   <div id="hike-modal" class="modal open-Modal-Button hide">
-        <div class="modal-background-background-color hsl(0, 0%, 100%)"></div>
-        <div class="modal-content bg-teal is-ancestor">
-          <div class="modal-details tile px-6 py-6 is-vertical is-parent">
-          </div>
-        </div>
-        <button class="modal-close is-large" aria-label="close"  style="display: none;"></button>
-      </div> 
+     <div class="modal-content bg-teal is-ancestor">
+       <div class="modal-details tile px-6 py-6 is-vertical is-parent">
+       </div>
+     </div>
+     <button class="modal-close is-large" aria-label="close"></button>
+  </div> 
 
-  <footer class="page-footer">
+  <footer class="page-footer text-center">
     <div class="col s12">
-      <ul>
-        <li><a id="about-btn" class="btn modal-trigger">About Us</a></li>
-            <a href="#!" class="modal-close waves-effect waves-green">Close</a>
-          </div>
-        </div>
-      </ul>
+      <a id="about-btn" class="btn modal-trigger text-center">About Us</a>
+      <a href="#!" class="modal-close waves-effect waves-grey hide">Close</a>
     </div>
-    <div class="footer-copyright">
-      <p class="copy-sign">&copy:2023</p>
+      <p class="copy-sign mt-3">&copy:2023</p>
     </div>
   </footer>
+
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="js/modal.js"></script>
