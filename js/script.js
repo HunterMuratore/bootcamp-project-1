@@ -5,7 +5,7 @@ var currentInfoWindow = null;
 var findTrail = $('#find-trail');
 var mapSection = $('#map');
 var hikeThisTrail = $('#hike-this-trail');
-var favSection = $('#favorite-section');
+var favSection = $('.favorite-section');
 var detailsDiv = $('.details');
 var trailImgDiv = $('.trail-image');
 var modalDetails = $('.modal-details');
@@ -195,7 +195,7 @@ function showFavorites() {
           <p>Trail Rating: ${trail.rating}/5 by ${trail.userTotal} users</p>
           <img class="mt-2" src="${trail.photo}" alt="Trail Image">
         </div>
-      </div?
+      </div>
     `;
 
     favSection.append(trailDetailsInfo);
@@ -266,11 +266,18 @@ function getWeatherData(lat, lon) {
 }
 
 function showFavoriteSection() {
-  $('#hero').addClass('hide');
+  $('.hero-section').addClass('hide');
   favSection.removeClass('hide');
 }
 
+function showHomeSection() {
+  favSection.addClass('hide');
+  $('.hero-section').removeClass('hide');
+}
+
 $(document.body).on('click', '.hikeBtn', hikeModal);
-$("$show-favorite-section").click(showFavoriteSection);
+$("#show-favorite-section").click(showFavoriteSection);
+$("#show-home-section").click(showHomeSection);
+
 
 showFavorites();

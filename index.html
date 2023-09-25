@@ -28,7 +28,7 @@
               alt="hiking clip art of trees">
           </li>
           <li>
-            <a id="go-home" class="btn" href="#">Home</a>
+            <a id="show-home-section" class="btn" href="#">Home</a>
           </li>
         </ul>
         <ul id="mobile-nav" class="right">
@@ -46,7 +46,7 @@
     </div>
   </nav>
 
-  <main id="hero" class="d-flex flex-column justify-content-center bg-blue">
+  <main id="hero" class="hero-section d-flex flex-column justify-content-center bg-blue">
     <br>
     <div class="blurb text-center">
       <h3>What is Trails Near Me?</h3>
@@ -61,7 +61,7 @@
     <div id="map"></div>
   </main>
 
-  <section id="favorite-section" class="d-flex flex-wrap justify-content-center tile p-6 bg-blue is-ancestor hide">
+  <section id="favorite-section" class="favorite-section d-flex flex-wrap justify-content-center tile p-6 bg-blue is-ancestor hide">
   </section>
 
   <div class="modal hide" id="modal">
@@ -71,13 +71,14 @@
         <p class="modal-card-title">About the Devs</p>
       </header>
       <section class="modal-card-body">
-        <ul>
-          <li>Hunter</li>
-          <li>Corey</li>
-          <li>Lorchesca</li>
-          <li>Kendall</li>
-          <li>Michael worked on implementing modals with two seperate frameworks, helped with some JavaScript logic and doing quality control.</li>
-      </ul>
+        <div class="about-us-div">
+          <p class="mb-3 text-wrap">Hello world we are a group of Rutgers   coding students creating a project to solve a solution in the   hiking world. We are passionate about coding and we chose to  tackle this project together to create something useful. We  worked to integrate APIs that would allow users to find not just   find a hand full of trails but allow access to a variety of   trails all around the country. We plan to continue adding new   features to Trails Near Me, so stay tuned for the future and our  growth as a team!</p>
+          <strong>Future directions for Trails Near Me:</strong>
+          <p>Allow user to input a location to search for nearby trails</p>
+          <p>Add tracking for user's recently hiked trails</p>
+          <p class="mb-3">Conitnue increasing functionality and effiency  of the app</p>
+          <p>Kendall McIntosh, Lorchesca Paul, Corey Phillips, Hunter   Muratore, Michael Edelstein</p>
+        </div>
       </section>
       <div class="modal-card-foot">
         <button class="close-Modal-Button is-large">Close</button>
