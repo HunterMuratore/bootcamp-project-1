@@ -10,6 +10,7 @@ var modalDetails = $('.modal-details');
 var modal = $('#modal');
 var openModalButton = $('.open-Modal-Button');
 
+
 function generateMapMarkers(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
@@ -49,7 +50,7 @@ function createMarker(place) {
     <br>
     <button class="hikeBtn open-Modal-Button" id="detailsBtn" data-target="hike-modal">Details</button>
     <img class="infoLink" src="${getPhotoUrl(place)}">
-   `;
+   `)
 
     // Add the html to the info window
   var infoWindow = new google.maps.InfoWindow({
@@ -123,6 +124,7 @@ function hikeModal() {
 
   var modalClose = $('.modal-close');
   modalClose.on('click', hideModal);
+  
 
   var favoriteBtn = $('.favoriteBtn');
   favoriteBtn.on('click', makeFavorite)
