@@ -189,6 +189,18 @@ body {
   font-weight: bold;
 }
 
+.location-input {
+  color: var(--theme-color-yellow);
+}
+
+#find-trail {
+  border-style: outset;
+  border-radius: 5px;
+  border-color: var(--theme-color-yellow);
+  background-color: var(--theme-color-blue);
+  height: min-content;
+}
+
 #map {
   min-height: 500px;
   min-width: 100%;

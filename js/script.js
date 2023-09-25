@@ -9,8 +9,8 @@ var trailImgDiv = $('.trail-image');
 var modalDetails = $('.modal-details');
 var modal = $('#modal');
 var openModalButton = $('.open-Modal-Button');
-
-
+var findTrail = $('#find-trail');
+  
 function generateMapMarkers(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
@@ -124,11 +124,17 @@ function hikeModal() {
 
   var modalClose = $('.modal-close');
   modalClose.on('click', hideModal);
-  
+
 
   var favoriteBtn = $('.favoriteBtn');
   favoriteBtn.on('click', makeFavorite)
 } 
+
+//This is the click listener for the find trail button in the hero. Ideally it will take the users input and show them a map of where thye want to go hiking
+findTrail.on('click', function() {
+  
+
+})
 
 // Add their favorite trails to their local storage
 function makeFavorite() {
