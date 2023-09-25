@@ -35,6 +35,10 @@ body {
   min-height: 100vh;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .nav-wrapper{
   background-color:rgb(245, 240, 187);
 }
