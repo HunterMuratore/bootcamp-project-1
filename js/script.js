@@ -143,7 +143,8 @@ function makeFavorite() {
     rating: placeData.rating,
     userTotal: placeData.user_ratings_total, 
     address: placeData.formatted_address,
-    googleMapsUrl: 'https://www.google.com/maps?q=' + encodeURIComponent(placeData.geometry.location.lat() + ',' + placeData.geometry.location.lng())
+    googleMapsUrl: 'https://www.google.com/maps?q=' + encodeURIComponent(placeData.geometry.location.lat() + ',' + placeData.geometry.location.lng()),
+    photo: getPhotoUrl(placeData)
   };
 
   // Check whether the isDuplicate variable is true or false based on whether the elements of trailDetails match any of the elements in the favTrail array
@@ -153,7 +154,8 @@ function makeFavorite() {
       existingTrail.rating === trailDetails.rating &&
       existingTrail.userTotal === trailDetails.userTotal &&
       existingTrail.address === trailDetails.address &&
-      existingTrail.googleMapsUrl === trailDetails.googleMapsUrl
+      existingTrail.googleMapsUrl === trailDetails.googleMapsUrl &&
+      existingTrail.photo === trailDetails.photo
     );
   }).length > 0;
 
@@ -185,6 +187,7 @@ function showFavorites() {
         <div class="mx-4">
           <a href="${trail.googleMapsUrl}" target="_blank">${trail.address} </a>
           <p>Trail Rating: ${trail.rating}/5 by ${trail.userTotal} users</p>
+          <img class="mt-2" src="${trail.photo}" alt="Trail Image">
         </div>
       </div?
     `;
