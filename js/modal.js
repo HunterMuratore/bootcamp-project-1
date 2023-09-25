@@ -1,15 +1,25 @@
-var openModalButton = $('.open-Modal-Button');
+
+var openModalButton = $('#about-btn');
 var closeModalButton = $('.close-Modal-Button');
-var modal = $('.modal');
- 
+var modal = $('#modal');
+var aboutBtn = $('#about-btn');
+
 function closeModal() {
     $(modal).hide();
-}
+ }
 
-$(document).ready
 function openModal() {
-    $(modal).show();
+    $(modal).show().removeClass('hide');
+    
 }
     
-$(closeModalButton).on('click', closeModal);
-$(openModalButton).on('click', openModal);
+ $(closeModalButton).on('click', closeModal);
+ $(openModalButton).on('click', openModal);
+
+
+
+
+  
+    
+  
+ 

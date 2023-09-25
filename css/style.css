@@ -40,13 +40,13 @@ body {
 }
 
 .nav-wrapper{
-  background-color:rgb(245, 240, 187);
+  background-color: var(--theme-color-yellow);
 }
 
 .btn:hover {
   border-style:solid;
   border-width: 1px;
-  box-shadow: 10px 10px rgb(144, 200, 172); 
+  box-shadow: 10px 10px var(--theme-color-teal); 
   border-radius: 50%;
   }
 
@@ -67,7 +67,7 @@ body {
 }
 
 .page-footer {
-  background-color:rgb(245, 240, 187);
+  background-color: var(--theme-color-yellow);
   z-index: 0;
   margin-top: auto; 
   height: 50%;
@@ -92,19 +92,23 @@ body {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.0);
 }
 
 .modal-card-head {
-  background-color: rgb(245, 240, 187);
+  background-color: var(--theme-color-yellow);
 }
 
 .modal-card-body {
-  background-color: rgb(196, 223, 170);
+  background-color: var(--theme-color-green);
 }
 
 .modal-card-foot {
-  background-color:  rgb(144, 200, 172);
+  background-color: var(--theme-color-teal);
+}
+
+.modal-background {
+  display: none;
 }
 
 .modal-inner {
@@ -119,8 +123,9 @@ body {
   border-style: none;
   border-radius: 15px;
   border-width: 4px;
-  border-color: rgb(144, 200, 172);
-  background-color: rgb(245, 240, 187);
+  border-color: var(--theme-color-teal);
+  background-color: var(--theme-color-yellow);
+  margin-left: 40%;
   width: 100px;
   height: 25px;
   cursor: pointer;
@@ -184,6 +189,18 @@ body {
   font-weight: bold;
 }
 
+.location-input {
+  color: var(--theme-color-yellow);
+}
+
+#find-trail {
+  border-style: outset;
+  border-radius: 5px;
+  border-color: var(--theme-color-yellow);
+  background-color: var(--theme-color-blue);
+  height: min-content;
+}
+
 #map {
   min-height: 500px;
   min-width: 100%;
@@ -214,4 +231,18 @@ body {
 
 .hikeBtn:active {
   background-color: var(--theme-color-teal);
+}
+
+.favoriteBtn {
+  border-style: none;
+  border-style: outset;
+  border-radius: 15px;
+  border-width: 4px;
+  border-color: var(--theme-color-yellow);
+  background-color: var(--theme-color-blue);
+  width: 115px;
+  height: 25px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-family: sans-serif;
 }
