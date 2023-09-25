@@ -80,7 +80,7 @@ body {
 
 .modal {
   position: absolute;
-  width: 100vh;
+  width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -134,6 +134,19 @@ body {
   display: none;
 }
 
+#favorite-section {
+  min-height: 100vh;
+  margin-bottom: 0;
+}
+
+.favorite-details {
+  max-height: 500px;
+}
+
+.fav-heading {
+  text-align: center;
+}
+
 #hero {
   background-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url("../images/pexels-photo-172510.jpeg");
   background-size: cover;
@@ -144,7 +157,7 @@ body {
 
 #hero .blurb {
   color: var(--theme-color-blue);
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)); 
+  background-image: radial-gradient(circle, rgba(131, 131, 131, 0.6), rgba(130, 130, 130, 0)); 
   align-items: center;
   text-align: center;
   margin: 0 auto;
