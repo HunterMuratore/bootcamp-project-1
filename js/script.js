@@ -2,8 +2,10 @@ var map;
 var service;
 var placeData;
 var currentInfoWindow = null;
+var findTrail = $('#find-trail');
 var mapSection = $('#map');
 var hikeThisTrail = $('#hike-this-trail');
+var favSection = $('#favorite-section');
 var detailsDiv = $('.details');
 var trailImgDiv = $('.trail-image');
 var modalDetails = $('.modal-details');
@@ -49,6 +51,7 @@ function createMarker(place) {
     </div>
     <br>
     <button class="hikeBtn open-Modal-Button" id="detailsBtn" data-target="hike-modal">Details</button>
+    <br>
     <img class="infoLink" src="${getPhotoUrl(place)}">
    `)
 
@@ -130,12 +133,6 @@ function hikeModal() {
   favoriteBtn.on('click', makeFavorite)
 } 
 
-//This is the click listener for the find trail button in the hero. Ideally it will take the users input and show them a map of where thye want to go hiking
-findTrail.on('click', function() {
-  
-
-})
-
 // Add their favorite trails to their local storage
 function makeFavorite() {
   // Get their trails from local storage
@@ -210,7 +207,7 @@ function addTrailDetails(name, rating, users, address, lat, lng) {
   var googleMapsUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(latLng);
   
   // Create a trail-detail div
-  var trailDetailsDiv = $('<div>').addClass('trail-details bg-green tile is-child box');
+  var trailDetailsDiv = $('<div>').addClass('trail-details bg-green tile is-child mb-3 box');
   
   // Construct the inner HTML of trail-detail div
   var trailDetailsInfo = `
@@ -268,6 +265,12 @@ function getWeatherData(lat, lon) {
   });
 }
 
+function showFavoriteSection() {
+  $('#hero').addClass('hide');
+  favSection.removeClass('hide');
+}
+
 $(document.body).on('click', '.hikeBtn', hikeModal);
+$("$show-favorite-section").click(showFavoriteSection);
 
 showFavorites();
